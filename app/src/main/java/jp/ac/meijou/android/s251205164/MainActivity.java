@@ -1,5 +1,6 @@
 package jp.ac.meijou.android.s251205164;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 //        TextView textView = findViewById(R.id.text_view);
 //        textView.setText(R.string.text);
         binding.textView.setText(R.string.text2);
-//        binding.textView.setTextColor(Integer.parseInt("#E30D6A"));
+        binding.textView.setTextColor(Color.parseColor("#E30D6A"));
 
         binding.imageView1.setImageResource(R.drawable.ic_android_2);
     }
