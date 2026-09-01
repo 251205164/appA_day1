@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">appA_day1</string>
+    <string name="text">おはよう！？</string>
+    <string name="text2">食べるかい？？</string>
 </resources>
