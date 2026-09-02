@@ -1,5 +1,6 @@
 package jp.ac.meijou.android.s251205164;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,8 @@ public class MainActivity3 extends AppCompatActivity {
     private  double value_1 = 0;
     private  double result = 0;
     private double value_2 = 0;
+    private int cal = 0;
+
 
 
     @Override
@@ -109,7 +112,12 @@ public class MainActivity3 extends AppCompatActivity {
         {
             String text = (String) binding.calculateView.getText();
             value_1 = Double.parseDouble(text);
+            binding.calculateView.setText(null);
         });
+
+        Intent intent = getIntent();
+        String setText = intent.getStringExtra("editText");
+        binding.calculateView.setText(setText);
 
     }
 
