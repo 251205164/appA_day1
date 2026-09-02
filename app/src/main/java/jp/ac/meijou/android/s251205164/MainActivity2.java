@@ -5,10 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Optional;
 
 import jp.ac.meijou.android.s251205164.databinding.ActivityMain2Binding;
 import jp.ac.meijou.android.s251205164.databinding.ActivityMain3Binding;
@@ -52,5 +56,32 @@ public class MainActivity2 extends AppCompatActivity {
             intent.putExtra("editText", settext);
             startActivity(intent);
         });
+
+        binding.buttonAction.setOnClickListener(view ->
+        {
+            var intent = new Intent(this, MainActivity3.class);
+            getActivityResult.launch(intent);
+        });
     }
+
+    //activity result
+    private final ActivityResultLauncher<Intent> getActivityResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result ->{
+                switch (result.getResultCode()){
+                    case RESULT_OK:
+                        Optional.ofNullable(result.getData())
+                            .map(data -> data.getStringExtra("ret"))
+                            .map((text->"result : " + text))
+                            .ifPresent(text -> binding.editTextResult.setText(text));
+                            break;
+                    case RESULT_CANCELED:
+                        binding.editTextResult.setText("Result: Canceled");
+                        break;
+                    default:
+                        binding.editTextResult.setText("Result: unknown(" + result.getResultCode() + ")");
+                        break;
+                }
+            }
+            );
 }
